@@ -1,9 +1,9 @@
-addpath('./ARDMakers')
-addpath('./Cancellation')
-addpath('./Classes')
+addpath('./AnalysisChain/ARDMakers')
+addpath('./AnalysisChain/Cancellation')
+addpath('./AnalysisChain/Classes')
 
 oRCF = cRCF;
-oRCF.readFromFile('Input/ArmasuisseClean.rcf', 1, 4096);
+oRCF.readFromFile('AnalysisChain/Input/ArmasuisseClean.rcf', 1, 4096);
 %oRCF.readFromFile('Input/ArmasuisseClean_pre_loadfershdf5_fix.rcf', 1, 4096);
 % Plot spectrum of Reference channel
 figure; plot(abs(fftshift(fft(oRCF.getReferenceData)))); title('Ref Spectrum');
