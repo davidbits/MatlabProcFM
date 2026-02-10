@@ -2,6 +2,12 @@
 Malmesbury_1.rcf
 *.h5
 temp.txt
+test.txt
+trial_log.log
+fers_files.txt
+output.txt
+uv.lock
+pyproject.toml
+collect_files.py
 
-Output/
-Output_raw/
+AnalysisChain/*Output*

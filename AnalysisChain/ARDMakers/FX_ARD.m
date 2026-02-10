@@ -17,8 +17,8 @@ FFTOutput = zeros(oRCF.getNSamples(), 1, 'single');
 
 ARDMatrix = zeros(nRangeBins, 2 * nDopplerBins + 1, 'single');
 
-RefFFT = fft( oRCF.m_fvReferenceData.*blackmanWindow(oRCF.getNSamples()) );
-SurvFFT = fft( oRCF.m_fvSurveillanceData.*blackmanWindow(oRCF.getNSamples()) );
+RefFFT = fft( oRCF.m_fvReferenceData.*blackman(oRCF.getNSamples()) );
+SurvFFT = fft( oRCF.m_fvSurveillanceData.*blackman(oRCF.getNSamples()) );
 
 zeroDopplerBinNo = nDopplerBins + 1;
 IFFTOutput = zeros(1,nRangeBins, 'single');

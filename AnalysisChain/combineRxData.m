@@ -1,12 +1,13 @@
 % Script: Combine_Sim_to_RCF.m
 % Purpose: Merges FERS HDF5 outputs into a single RCF for the ProcServer
-addpath('classes');
-addpath('pr_illuminators/ardMakers'); % For loadfersHDF5
+addpath('Classes');
+addpath('./Input');
+addpath('ARDMakers'); % For loadfersHDF5
 
 % Configuration
-refFile = '../Output/ArmasuisseRefRxClean.h5';
-surFile = '../Output/ArmasuisseSurRxClean.h5';
-outFile = '../Output/ArmasuisseClean.rcf';
+refFile = 'Input/ArmasuisseRefRxClean.h5';
+surFile = 'Input/ArmasuisseSurRxClean.h5';
+outFile = 'Input/ArmasuisseClean.rcf';
 Fs = 204800;
 Fc = 89e6;
 
