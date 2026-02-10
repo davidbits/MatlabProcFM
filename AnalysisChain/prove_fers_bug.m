@@ -2,7 +2,7 @@
 clear; clc;
 
 file_clean = 'Input/CleanSingleTarget/ArmasuisseRefRxClean.h5'; % From the 16kW only run
-file_jammer = 'Input/JamSingleTarget/ArmasuisseRefRxJam.h5';   % From the 16kW + 1W Jammer run
+file_jammer = 'Input/JamSingleTarget_tone/ArmasuisseRefRxToneJam.h5';   % From the 16kW + 1W Jammer run
 
 fprintf('--- FERS Simulator Bug Detection ---\n');
 

@@ -12,7 +12,7 @@ close all;
 hdf5_input = 0;
 
 % The input file created by combineRxData.m
-InputRCFFilename = 'Input/JamSingleTarget/ArmasuisseJam.rcf';
+InputRCFFilename = 'Input/JamSingleTarget_tone/ArmasuisseJam.rcf';
 InputHDF5Filename = 'RecordingName.h5';
 
 % --- Derived CPI Parameters from CleanSingleTarget.ard ---

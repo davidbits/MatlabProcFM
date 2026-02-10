@@ -8,9 +8,9 @@ addpath('ARDMakers');
 
 % Configuration
 % Ensure these paths match where you saved your FERS output files
-refFile = 'Input/JamSingleTarget/ArmasuisseRefRxJam.h5';
-surFile = 'Input/JamSingleTarget/ArmasuisseSurRxJam.h5';
-outFile = 'Input/JamSingleTarget/ArmasuisseJam.rcf';
+refFile = 'Input/JamSingleTarget_tone/ArmasuisseRefRxToneJam.h5';
+surFile = 'Input/JamSingleTarget_tone/ArmasuisseSurRxToneJam.h5';
+outFile = 'Input/JamSingleTarget_tone/ArmasuisseJam.rcf';
 
 % Parameters from your scenario
 Fs = 204800;
