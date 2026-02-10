@@ -1,0 +1,41 @@
+Reading header...
+Reading data...
+Reading comment string...
+Completed.
+
+========== ARD FILE PARAMETERS ==========
+File: AnalysisChain/Output/16.ard
+
+--- Stored Parameters ---
+Sample Rate (Fs): 89000000 Hz
+Carrier Frequency (Fc): 89.00 MHz
+Bandwidth: 0.20 MHz
+Tx-Rx Baseline: 74460.0 m
+Timestamp: 0 μs
+ARD Type: 2 (Cross-Ambiguity Function)
+
+--- Derived CPI Parameters ---
+CPI Duration: 4.000 seconds
+CPI Size: 356000000 samples
+Doppler Resolution: 0.2500 Hz
+Range Resolution: 1463.83 m (expected: 3.37 m)
+
+--- ARD Coverage ---
+Max Range: 250.1 km (74460.0 m baseline + 175.7 km processing)
+Max Doppler: ±200.00 Hz
+Range Bins: 120
+Doppler Bins: 1601
+
+--- Equivalent MatlabProcServ.m Settings ---
+CPI_s = 4.000;
+ARDMaxRange_m = 175660;
+ARDMaxDoppler_Hz = 200;
+TxToReferenceRxDistance_m = 74460;
+
+=========================================
+
+Reading header...
+Reading data...
+Reading comment string...
+Completed.
+Likely NO cancellation (0.7 dB)

@@ -7,7 +7,7 @@ filename = 'Malmesbury_1.rcf';
 
 % Select where to start from in the recorded data (This data is about 10 min long so anything from 0 to 500s+ works)
 Fs=204800;
-t_start = 360; % input('\nStart time [s]: ');
+t_start = 540; % input('\nStart time [s]: ');
 t_length = 180; % input('Signal length [s]: ');
 t_end = t_start+t_length;
 
@@ -22,7 +22,7 @@ refPower = var(ref);
 ref = ref .* (1 / sqrt(refPower));
 
 fprintf('Writing HDF5 data...\n');
-hdf5write('txWaveFormNormalised.h5', '/I/value', real(ref), '/Q/value', imag(ref));
+hdf5write('jammerWaveFormNormalised.h5', '/I/value', real(ref), '/Q/value', imag(ref));
 fprintf('Complete.\n');
 
 %fprintf('\nPlotting histogram of noise...\n')
