@@ -11,4 +11,4 @@ figure(1);
 oARD2 = cARD;
 oARD2.readFromFile(ARD_File);
 % Can use (km or m) (m/s or Hz)
-oARD2.plot2D('m', 'Hz', 0, -40);
+oARD2.plot2D('m', 'Hz', 0, -30);

@@ -110,8 +110,8 @@ end
 
 % ---
 
-%ard_filename = 'AnalysisChain/Output/16.ard';
-ard_filename = 'CleanSingleTarget.ard';
+ard_filename = 'AnalysisChain/Output/16.ard';
+%ard_filename = 'CleanSingleTarget.ard';
 
 reverseEngineerARD(ard_filename);
 detectCancellation(ard_filename);

@@ -13,3 +13,4 @@ collect_files.py
 *.log
 
 AnalysisChain/*Output*
+OLD_FILES

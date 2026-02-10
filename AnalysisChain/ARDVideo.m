@@ -11,7 +11,7 @@ for i = 0:359
     if exist(filename, 'file')
         oARD = cARD;
         oARD.readFromFile(filename);
-        oARD.plot2D('m', 'Hz', 0, -40);
+        oARD.plot2D('m', 'Hz', 0, -30);
         title(sprintf('CPI: %d', i));
         drawnow;
     end
