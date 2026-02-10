@@ -1,3 +1,7 @@
 .idea
 Malmesbury_1.rcf
 *.h5
+temp.txt
+
+Output/
+Output_raw/

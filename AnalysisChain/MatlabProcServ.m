@@ -1,53 +1,84 @@
-addpath('.\ARDMakers')
-addpath('.\Cancellation')
-addpath('.\Classes')
-addpath('.\Input');
+addpath('./ARDMakers')
+addpath('./Cancellation')
+addpath('./Classes')
+addpath('./Input');
 
 clear;
 clc;
 close all;
 
 %% Processing Parameters:
-hdf5_input = 1; % 0 to provide a rcf input, 1 to provide a HDF5 input
-InputRCFFilename = 'RecordingName.rcf';
-InputHDF5Filename = 'RecordingName.h5';
+hdf5_input = 1;
+InputRCFFilename = '';
+InputHDF5Filename = '';
 
-CPI_s = 0.25; % The CPI in seconds
-EnableCancellation = 1; % Enable or disable cancellation
-CancellationMaxRange_m = 15000; % The cancellation range extent in metres
-CancallationMaxDoppler_Hz = 0; % The cancellation Doppler extent in Hertz (ranges from - to + of this value)
-CancellationNInterations = 5; % The number of CGLS cancellation iterations
-CancellationNSegments = 8; %Number segments each CPI is split into for cancellation
+CPI_s = 0.5; % Integration time (0.5s is standard for FM)
+EnableCancellation = 1;
 
-ARDMaxRange_m = 15000; % The range extent of the ARD
-ARDMaxDoppler_Hz = 88; % The Doppler extent of the ARD (from - to + of this value)
-TxToReferenceRxDistance_m = 0; % The baseline distance
-outputARDPath = '.\Output'; % The path in which to store the resultant ARD maps
+% The actual distance between Tx and Rx from your XML
+TxToReferenceRxDistance_m = 74483;
+
+% Cancellation Range: Must be GREATER than TxToReferenceRxDistance_m.
+% This defines how far past the direct signal we want to cancel clutter.
+% 74483 + 3000m buffer = 77500
+CancellationMaxRange_m = 77500;
+
+% ARD Range: Must be large enough to see the target.
+% Target is at ~10km altitude, moving.
+% Let's look out to 120km bistatic range to be safe.
+ARDMaxRange_m = 120000;
+
+CancallationMaxDoppler_Hz = 200; % Increased to catch the moving target
+CancellationNInterations = 10;
+CancellationNSegments = 8;
+
+ARDMaxDoppler_Hz = 300;
+outputARDPath = './Output';
 
 if hdf5_input == 1
-    % Run the line below to determine which GSNC chunk (GSNC_dataX) to extract
-    % whos('-file', InputHDF5Filename)
-    fprintf('Reading HDF5 File..\n')
-    % Read the data chunk
-    load(InputHDF5Filename, 'GSNC_data2', '-mat');
-    % Read the sample rate
-    load(InputHDF5Filename, 'SR_uHz', '-mat');
-    % Read the centre frequency
-    load(InputHDF5Filename, 'GCF_uHz', '-mat');
-    % Read the bandwidth
-    load(InputHDF5Filename, 'GCBW_uHz', '-mat');
+    fprintf('Reading FERS HDF5 Files..\n');
+
+    % Define FERS filenames
+    RefFile = 'ArmasuisseRefRxClean.h5';
+    SurvFile = 'ArmasuisseSurRxClean.h5';
+
+    % FERS outputs data in chunks. For a single run, it is usually chunk_000000.
+    % We read I and Q separately and combine them.
+
+    % Load Reference Data
+    try
+        RefI = h5read(RefFile, '/chunk_000000_I');
+        RefQ = h5read(RefFile, '/chunk_000000_Q');
+        RefData = complex(single(RefI), single(RefQ));
+    catch
+        error('Could not read Reference HDF5. Check filename or chunk name.');
+    end
+
+    % Load Surveillance Data
+    try
+        SurvI = h5read(SurvFile, '/chunk_000000_I');
+        SurvQ = h5read(SurvFile, '/chunk_000000_Q');
+        SurvData = complex(single(SurvI), single(SurvQ));
+    catch
+        error('Could not read Surveillance HDF5. Check filename or chunk name.');
+    end
+
     fprintf('HDF5 file read completed\n');
 
-    % Specify the indices of the reference and surveillance channel
-    RefChannelIndex = 1;
-    SurvChannelIndex = 2;
-    RefData = single(GSNC_data2(:,RefChannelIndex));
-    SurvData = single(GSNC_data2(:,SurvChannelIndex));
-    clear GSNC_data2;
-    
+    % Hardcode parameters from your SingleTargetClean.fersxml
+    % The script expects uHz (microHertz), so we multiply Hz by 1e6
+    SR_uHz = 204800 * 1e6;   % Sample Rate from XML
+    GCF_uHz = 89e6 * 1e6;    % Carrier Frequency from XML
+    GCBW_uHz = 100e3 * 1e6;  % Bandwidth (Approx for FM)
+
     % Compute the number of samples in the CPI
-    CPISize_nSamp = (double(SR_uHz) / 1000000) * CPI_s;
-    TotalNumSamples = length(RefData);
+    % (SR_uHz / 1e6) converts back to Hz for calculation
+    CPISize_nSamp = floor((double(SR_uHz) / 1000000) * CPI_s);
+    TotalNumSamples = min(length(RefData), length(SurvData));
+
+    % Ensure data lengths match
+    RefData = RefData(1:TotalNumSamples);
+    SurvData = SurvData(1:TotalNumSamples);
 else
     oInputRCFHeader = cRCF;
     oInputRCFHeader.readHeaderFromFile(InputRCFFilename);
