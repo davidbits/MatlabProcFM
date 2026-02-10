@@ -19,21 +19,15 @@ InputHDF5Filename = 'RecordingName.h5';
 CPI_s = 4.000; % CPI Duration
 
 % --- Cancellation Settings ---
-% Enabled to remove the Direct Signal (DSI) at ~74.5km so the target is visible
 EnableCancellation = 1;
-% Must cover the baseline (74460m) plus a buffer to cancel the direct path
 CancellationMaxRange_m = 85000;
-% Cancel static/slow clutter (DSI is static geometry)
 CancallationMaxDoppler_Hz = 5;
-CancellationNInterations = 15; % CGLS iterations
-CancellationNSegments = 4; % Split CPI into segments for cancellation stability
+CancellationNInterations = 15;
+CancellationNSegments = 4;
 
 % --- ARD Coverage Parameters ---
-% Max Range: 175.7 km processing + baseline (approx) -> 175660m requested
-ARDMaxRange_m = 175660;
-% Max Doppler: +/- 200 Hz
+ARDMaxRange_m = 250100;
 ARDMaxDoppler_Hz = 200;
-% Tx-Rx Baseline
 TxToReferenceRxDistance_m = 74460;
 
 outputARDPath = './Output'; % The path in which to store the resultant ARD maps
