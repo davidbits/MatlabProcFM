@@ -47,18 +47,16 @@ if hdf5_input == 1
 
     % Load Reference Data
     try
-        RefI = h5read(RefFile, '/chunk_000000_I');
-        RefQ = h5read(RefFile, '/chunk_000000_Q');
-        RefData = complex(single(RefI), single(RefQ));
+        [I_ref, Q_ref, scale_ref] = loadfersHDF5(refFile);
+        refData = complex(I_ref, Q_ref) * scale_ref;
     catch
         error('Could not read Reference HDF5. Check filename or chunk name.');
     end
 
     % Load Surveillance Data
     try
-        SurvI = h5read(SurvFile, '/chunk_000000_I');
-        SurvQ = h5read(SurvFile, '/chunk_000000_Q');
-        SurvData = complex(single(SurvI), single(SurvQ));
+        [I_sur, Q_sur, scale_sur] = loadfersHDF5(surFile);
+        surData = complex(I_sur, Q_sur) * scale_sur;
     catch
         error('Could not read Surveillance HDF5. Check filename or chunk name.');
     end
