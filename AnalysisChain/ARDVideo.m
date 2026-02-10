@@ -5,9 +5,17 @@ addpath('./Classes')
 clear; clc; close all;
 
 % Configuration
-%targetFolder = 'Ref_Outputs/NoiseFMTx1';
+%targetFolder = 'Ref_Outputs/CleanSingleTarget';
+targetFolder = 'Ref_Outputs/NoiseFMTx1';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget';
-targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget';
+
+% Output Videos
+videoFolder = 'Videos';
+sanitizedTarget = strrep(targetFolder, '/', '-');
+if ~exist(videoFolder, 'dir')
+    mkdir(videoFolder);
+end
 
 % Get all .ard files in the target folder
 ardFiles = dir(fullfile(targetFolder, '*.ard'));
@@ -27,7 +35,23 @@ end
 fprintf('Detected MODE %d\n', mode);
 
 % Process files based on detected mode
-figure;
+fig = figure;
+
+if ispc || ismac
+    outputFilename = fullfile(videoFolder, sprintf('%s_ard_video.mp4', sanitizedTarget));
+    profile = 'MPEG-4';
+else
+    outputFilename = fullfile(videoFolder, sprintf('%s_ard_video.avi', sanitizedTarget));
+    profile = 'Motion JPEG AVI';
+end
+
+v = VideoWriter(outputFilename, profile);
+v.FrameRate = 10;
+if strcmp(profile, 'MPEG-4')
+    v.Quality = 95;
+end
+open(v);
+
 if mode == 1
     % MODE 1: Sequential numbered files (0 through 44)
     for i = 0:44
@@ -35,9 +59,11 @@ if mode == 1
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -40);
+            oARD.plot2D('m', 'Hz', 0, -20);
             title(sprintf('CPI: %d', i));
             drawnow;
+            frame = getframe(fig);
+            writeVideo(v, frame);
         else
             warning('Missing file: %s', filename);
         end
@@ -52,12 +78,17 @@ elseif mode == 2
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -40);
+            oARD.plot2D('m', 'Hz', 0, -20);
             title(sprintf('CPI: %d - %s', i-1, sortedFiles{i}));
             drawnow;
+            frame = getframe(fig);
+            writeVideo(v, frame);
         end
     end
 end
+
+close(v);
+fprintf('Saved video to %s\n', outputFilename);
 
 %% Helper Functions
 

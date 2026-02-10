@@ -12,5 +12,6 @@ collect_files.py
 *.rcf
 *.log
 
+Videos/
 AnalysisChain/*Output*
 OLD_FILES
