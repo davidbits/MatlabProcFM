@@ -9,5 +9,6 @@ output.txt
 uv.lock
 pyproject.toml
 collect_files.py
+*.rcf
 
 AnalysisChain/*Output*
