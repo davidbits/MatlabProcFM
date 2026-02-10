@@ -10,5 +10,6 @@ uv.lock
 pyproject.toml
 collect_files.py
 *.rcf
+*.log
 
 AnalysisChain/*Output*

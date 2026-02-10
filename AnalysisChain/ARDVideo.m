@@ -11,7 +11,7 @@ for i = 0:359
     if exist(filename, 'file')
         oARD = cARD;
         oARD.readFromFile(filename);
-        oARD.plot2D('m', 'Hz', 0, -60); % Adjust -60 based on your noise floor
+        oARD.plot2D('m', 'Hz', 0, -40);
         title(sprintf('CPI: %d', i));
         drawnow;
     end
