@@ -24,7 +24,7 @@
     </timing>
     <timing name="RxClock">
         <frequency>204800</frequency>
-        <random_freq_offset>0.01</random_freq_offset><!-- Approximately 50 ppb, typical for good OCXO -->
+        <!--<random_freq_offset>0.01</random_freq_offset>-->
     </timing>
     <timing name="JammerClock">
         <frequency>204800</frequency>
@@ -80,7 +80,7 @@
             <prf>0.001</prf>
             <window_skip>0</window_skip>
             <window_length>180</window_length>
-            <noise_temp>438.4</noise_temp><!--4 dB NF as per the minimal frontend -->
+            <!--<noise_temp>438.4</noise_temp>--><!--4 dB NF as per the minimal frontend -->
         </receiver>
     </platform>
     <platform name="ArmasuisseSurRxPlatform">
@@ -102,7 +102,7 @@
             <prf>0.001</prf>
             <window_skip>0</window_skip>
             <window_length>180</window_length>
-            <noise_temp>438.4</noise_temp><!--4 dB NF as per the minimal frontend -->
+            <!--<noise_temp>438.4</noise_temp>--><!--4 dB NF as per the minimal frontend -->
         </receiver>
     </platform>
     <platform name="target1Platform">

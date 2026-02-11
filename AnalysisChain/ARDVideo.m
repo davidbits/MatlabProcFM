@@ -7,9 +7,15 @@ clear; clc; close all;
 % Configuration
 %targetFolder = 'Ref_Outputs/CleanSingleTarget';
 %targetFolder = 'Ref_Outputs/NoiseFMTx1';
-targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_wo_thermal_noise';
+targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_no_rand';
+targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_no_rand';
+targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget_no_rand';
+
+DB_LEVEL = 20;
 
 % Output Videos
 videoFolder = 'Videos';
@@ -60,7 +66,7 @@ if mode == 1
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -40);
+            oARD.plot2D('m', 'Hz', 0, -DB_LEVEL);
             title(sprintf('CPI: %d', i));
             drawnow;
             frame = getframe(fig);
@@ -79,7 +85,7 @@ elseif mode == 2
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -40);
+            oARD.plot2D('m', 'Hz', 0, -DB_LEVEL);
             title(sprintf('CPI: %d - %s', i-1, sortedFiles{i}));
             drawnow;
             frame = getframe(fig);

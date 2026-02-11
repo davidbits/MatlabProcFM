@@ -20,7 +20,7 @@
     </timing>
     <timing name="RxClock">
         <frequency>204800</frequency>
-        <random_freq_offset>0.01</random_freq_offset>
+        <!--<random_freq_offset>0.01</random_freq_offset>-->
     </timing>
     <antenna name="RxYagiAntenna" pattern="sinc">
         <efficiency>1</efficiency>
