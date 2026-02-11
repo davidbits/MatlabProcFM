@@ -17,16 +17,16 @@ addpath('ARDMakers');  % For loadfersHDF5
 %  FILE PATHS
 %  ========================================================================
 % Clean (FM transmitter only)
-files.clean.ref = 'Input/CleanSingleTarget_no_rand/ArmasuisseRefRxClean.h5';
-files.clean.sur = 'Input/CleanSingleTarget_no_rand/ArmasuisseSurRxClean.h5';
+files.clean.ref = 'Input/CleanSingleTarget_fers_latest/ArmasuisseRefRx_results.h5';
+files.clean.sur = 'Input/CleanSingleTarget_fers_latest/ArmasuisseSurRx_results.h5';
 
 % Wideband FM Jammer (FM transmitter + 1W wideband jammer)
-files.wbjam.ref = 'Input/JamSingleTarget_no_rand/ArmasuisseRefRxJam.h5';
-files.wbjam.sur = 'Input/JamSingleTarget_no_rand/ArmasuisseSurRxJam.h5';
+files.wbjam.ref = 'Input/JamSingleTarget_fers_latest/ArmasuisseRefRx_results.h5';
+files.wbjam.sur = 'Input/JamSingleTarget_fers_latest/ArmasuisseSurRx_results.h5';
 
 % Single-Tone Jammer (FM transmitter + 1W CW tone jammer)
-files.tonejam.ref = 'Input/JamSingleTarget_tone_no_rand/ArmasuisseRefRxToneJam.h5';
-files.tonejam.sur = 'Input/JamSingleTarget_tone_no_rand/ArmasuisseSurRxToneJam.h5';
+files.tonejam.ref = 'Input/JamSingleTarget_tone_fers_latest/ArmasuisseRefRx_results.h5';
+files.tonejam.sur = 'Input/JamSingleTarget_tone_fers_latest/ArmasuisseSurRx_results.h5';
 
 %% ========================================================================
 %  HELPER: Load and scale a FERS HDF5 file into a complex signal

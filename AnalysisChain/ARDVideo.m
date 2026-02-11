@@ -11,11 +11,22 @@ clear; clc; close all;
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_wo_thermal_noise';
-targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_no_rand';
-targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_no_rand';
-targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget_no_rand';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_no_rand';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_no_rand';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget_no_rand';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget_fers_latest';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_fers_latest';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_stationary_jam';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_stationary_jam';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1uw';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1uw';
+targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1mw';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1mw';
 
-DB_LEVEL = 20;
+DB_LEVEL = -10;
 
 % Output Videos
 videoFolder = 'Videos';
@@ -66,7 +77,7 @@ if mode == 1
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -DB_LEVEL);
+            oARD.plot2D('m', 'Hz', 0, DB_LEVEL);
             title(sprintf('CPI: %d', i));
             drawnow;
             frame = getframe(fig);
@@ -85,7 +96,7 @@ elseif mode == 2
         if exist(filename, 'file')
             oARD = cARD;
             oARD.readFromFile(filename);
-            oARD.plot2D('m', 'Hz', 0, -DB_LEVEL);
+            oARD.plot2D('m', 'Hz', 0, DB_LEVEL);
             title(sprintf('CPI: %d - %s', i-1, sortedFiles{i}));
             drawnow;
             frame = getframe(fig);

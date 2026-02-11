@@ -8,9 +8,9 @@ addpath('ARDMakers');
 
 % Configuration
 % Ensure these paths match where you saved your FERS output files
-refFile = 'Input/CleanSingleTarget_no_rand/ArmasuisseRefRxClean.h5';
-surFile = 'Input/CleanSingleTarget_no_rand/ArmasuisseSurRxClean.h5';
-outFile = 'Input/CleanSingleTarget_no_rand/ArmasuisseClean.rcf';
+refFile = 'Input/JamSingleTarget_low_power_1mw/ArmasuisseRefRx.h5';
+surFile = 'Input/JamSingleTarget_low_power_1mw/ArmasuisseSurRx.h5';
+outFile = 'Input/JamSingleTarget_low_power_1mw/ArmasuisseJam.rcf';
 
 % Parameters from your scenario
 Fs = 204800;

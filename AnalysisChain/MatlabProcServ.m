@@ -12,7 +12,7 @@ close all;
 hdf5_input = 0;
 
 % The input file created by combineRxData.m
-InputRCFFilename = 'Input/JamSingleTarget_tone_no_rand/ArmasuisseJam.rcf';
+InputRCFFilename = 'Input/JamSingleTarget_low_power_1mw/ArmasuisseJam.rcf';
 InputHDF5Filename = 'RecordingName.h5';
 
 % --- Derived CPI Parameters from CleanSingleTarget.ard ---
@@ -30,7 +30,7 @@ ARDMaxRange_m = 250100;
 ARDMaxDoppler_Hz = 200;
 TxToReferenceRxDistance_m = 74460;
 
-outputARDPath = './Output'; % The path in which to store the resultant ARD maps
+outputARDPath = './Output';
 
 % Ensure output directory exists
 if ~exist(outputARDPath, 'dir')
