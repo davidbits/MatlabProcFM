@@ -1,0 +1,27 @@
+File Path,Q-channel Power,I-channel Power
+Input/CleanSingleTarget/ArmasuisseRefRxClean.h5,1.198481e-09,1.199460e-09
+Input/CleanSingleTarget/ArmasuisseSurRxClean.h5,7.214349e-10,7.209441e-10
+Input/CleanSingleTarget_fers_latest/ArmasuisseRefRx_results.h5,5.568759e-07,5.567605e-07
+Input/CleanSingleTarget_fers_latest/ArmasuisseSurRx_results.h5,5.567612e-10,5.565390e-10
+Input/CleanSingleTarget_no_rand/ArmasuisseRefRxClean.h5,1.198796e-09,1.199143e-09
+Input/CleanSingleTarget_no_rand/ArmasuisseSurRxClean.h5,7.210245e-10,7.213533e-10
+Input/JamSingleTarget/ArmasuisseRefRxJam.h5,1.273936e-09,1.273713e-09
+Input/JamSingleTarget/ArmasuisseSurRxJam.h5,8.117577e-10,8.121379e-10
+Input/JamSingleTarget_fers_latest/ArmasuisseRefRx_results.h5,5.569810e-07,5.568729e-07
+Input/JamSingleTarget_fers_latest/ArmasuisseSurRx_results.h5,7.934464e-09,7.927977e-09
+Input/JamSingleTarget_fers_latest_low_power/ArmasuisseRefRx_results.h5,5.568772e-07,5.567625e-07
+Input/JamSingleTarget_fers_latest_low_power/ArmasuisseSurRx_results.h5,6.306302e-10,6.302711e-10
+Input/JamSingleTarget_fers_latest_low_power_1mw/ArmasuisseRefRx_results.h5,5.568761e-07,5.567609e-07
+Input/JamSingleTarget_fers_latest_low_power_1mw/ArmasuisseSurRx_results.h5,5.641702e-10,5.639165e-10
+Input/JamSingleTarget_fers_latest_low_power_1uw/ArmasuisseRefRx_results.h5,5.568759e-07,5.567605e-07
+Input/JamSingleTarget_fers_latest_low_power_1uw/ArmasuisseSurRx_results.h5,5.567696e-10,5.565466e-10
+Input/JamSingleTarget_low_power/ArmasuisseRefRx.h5,1.199529e-09,1.199844e-09
+Input/JamSingleTarget_low_power/ArmasuisseSurRx.h5,7.219410e-10,7.222749e-10
+Input/JamSingleTarget_low_power_1mw/ArmasuisseRefRx.h5,1.198865e-09,1.199202e-09
+Input/JamSingleTarget_low_power_1mw/ArmasuisseSurRx.h5,7.211184e-10,7.214487e-10
+Input/JamSingleTarget_low_power_1uw/ArmasuisseRefRx.h5,1.198796e-09,1.199143e-09
+Input/JamSingleTarget_low_power_1uw/ArmasuisseSurRx.h5,7.210247e-10,7.213535e-10
+Input/JamSingleTarget_no_rand/ArmasuisseRefRxJam.h5,1.273814e-09,1.273836e-09
+Input/JamSingleTarget_no_rand/ArmasuisseSurRxJam.h5,8.117384e-10,8.121556e-10
+Input/JamSingleTarget_stationary_jam/ArmasuisseRefRx.h5,1.276909e-09,1.277249e-09
+Input/JamSingleTarget_stationary_jam/ArmasuisseSurRx.h5,7.573527e-10,7.576896e-10

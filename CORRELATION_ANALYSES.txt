@@ -1,0 +1,188 @@
+CORRELATION ANALYSIS BETWEEN CleanSingleTarget_fers_latest and JamSingleTarget_fers_latest:
+FERS Simulator Bug Detection (fullscale-corrected, complex IQ)
+Loading Clean scenario...
+  Loaded AnalysisChain/Input/CleanSingleTarget_fers_latest/ArmasuisseRefRx_results.h5  (36864000 samples, fullscale = 1.399788e-03)
+  Loaded AnalysisChain/Input/CleanSingleTarget_fers_latest/ArmasuisseSurRx_results.h5  (36864000 samples, fullscale = 4.593096e-05)
+Loading Wideband Jammer scenario...
+  Loaded AnalysisChain/Input/JamSingleTarget_fers_latest/ArmasuisseRefRx_results.h5  (36864000 samples, fullscale = 1.396624e-03)
+  Loaded AnalysisChain/Input/JamSingleTarget_fers_latest/ArmasuisseSurRx_results.h5  (36864000 samples, fullscale = 2.159712e-04)
+
+--- Fullscale Attributes (ADC-to-Physical Scaling) ---
+  Clean   Ref: 1.399788e-03    Sur: 4.593096e-05
+  WB Jam  Ref: 1.396624e-03    Sur: 2.159712e-04
+
+  POWER ANALYSIS (fullscale-corrected, complex magnitude)
+  Power = var(real) + var(imag) of the scaled complex signal
+
+                                       Reference    Surveillance
+                                       ---------    ------------
+  Clean (FM only)                   1.113636e-06    1.113300e-09
+  Wideband Jammer (FM+1W)           1.113854e-06    1.586244e-08
+
+  Delta Power (Jammer - Clean):
+  Wideband Jammer                  +2.174656e-10   +1.474914e-08
+
+  Percentage Change:
+  Wideband Jammer                         +0.02%        +1324.81%
+
+  Superposition Check:
+  [PASS] Ref power increased or unchanged with wideband jammer
+  [PASS] Sur power increased or unchanged with wideband jammer
+
+  CORRELATION ANALYSIS (fullscale-corrected)
+  Expected: rho > 0.99 if FERS sums signals correctly
+  (16kW FM dominates; 1W jammer is negligible at Ref Rx)
+
+  Comparison                              Ref rho     Sur rho
+                                          -------     -------
+  WB Jam vs Clean (complex |rho|)       +0.999907   +0.265069
+  WB Jam vs Clean (real-part rho)       +0.999907   +0.264998
+
+  Decorrelation Assessment:
+  [PASS] Ref (WB Jammer, complex): rho = 0.999907
+  [FAIL] Sur (WB Jammer, complex): rho = 0.265069  (expected > 0.99)
+
+  Q-CHANNEL ANALYSIS (I/Q integrity check)
+  If Q=0 in jammer runs, the signal is real-valued and will
+  produce mirrored +/- Doppler lines in the ARD.
+
+  Signal                        P(I)            P(Q)   Q/I Ratio
+  ------                        ----            ----   ---------
+  Clean Ref             5.567605e-07    5.568759e-07    1.000207
+  Clean Sur             5.565390e-10    5.567612e-10    1.000399
+  WB Jam Ref            5.568729e-07    5.569810e-07    1.000194
+  WB Jam Sur            7.927977e-09    7.934464e-09    1.000818
+
+  CLIPPING / SATURATION CHECK
+  Clean Ref           Peak |I|: 1.399788e-03   Peak |Q|: 1.391928e-03
+  Clean Sur           Peak |I|: 4.593096e-05   Peak |Q|: 4.579640e-05
+  WB Jam Ref          Peak |I|: 1.396624e-03   Peak |Q|: 1.394621e-03
+  WB Jam Sur          Peak |I|: 2.159712e-04   Peak |Q|: 2.127153e-04
+
+---
+
+CORRELATION ANALYSIS BETWEEN JamSingleTarget_fers_latest_low_power_1uw and JamSingleTarget_low_power_1uw:
+FERS Simulator Bug Detection (fullscale-corrected, complex IQ)
+Loading Clean scenario...
+  Loaded AnalysisChain/Input/JamSingleTarget_fers_latest_low_power_1uw/ArmasuisseRefRx_results.h5  (36864000 samples, fullscale = 1.399785e-03)
+  Loaded AnalysisChain/Input/JamSingleTarget_fers_latest_low_power_1uw/ArmasuisseSurRx_results.h5  (36864000 samples, fullscale = 4.598354e-05)
+Loading Wideband Jammer scenario...
+  Loaded AnalysisChain/Input/JamSingleTarget_low_power_1uw/ArmasuisseRefRx.h5  (36864000 samples, fullscale = 6.599602e-05)
+  Loaded AnalysisChain/Input/JamSingleTarget_low_power_1uw/ArmasuisseSurRx.h5  (36864000 samples, fullscale = 5.003155e-05)
+
+--- Fullscale Attributes (ADC-to-Physical Scaling) ---
+  Clean   Ref: 1.399785e-03    Sur: 4.598354e-05
+  WB Jam  Ref: 6.599602e-05    Sur: 5.003155e-05
+  [NOTE] Ref fullscale differs between Clean and WB Jammer by 95.3%
+
+  POWER ANALYSIS (fullscale-corrected, complex magnitude)
+  Power = var(real) + var(imag) of the scaled complex signal
+
+                                       Reference    Surveillance
+                                       ---------    ------------
+  Clean (FM only)                   1.113636e-06    1.113316e-09
+  Wideband Jammer (FM+1W)           2.397938e-09    1.442378e-09
+
+  Delta Power (Jammer - Clean):
+  Wideband Jammer                  -1.111239e-06   +3.290621e-10
+
+  Percentage Change:
+  Wideband Jammer                        -99.78%          +29.56%
+
+  Superposition Check:
+  [FAIL] Ref power DECREASED by 99.78% with wideband jammer (violates P_total = P1 + P2)
+  [PASS] Sur power increased or unchanged with wideband jammer
+
+  CORRELATION ANALYSIS (fullscale-corrected)
+  Expected: rho > 0.99 if FERS sums signals correctly
+  (16kW FM dominates; 1W jammer is negligible at Ref Rx)
+
+  Comparison                              Ref rho     Sur rho
+                                          -------     -------
+  WB Jam vs Clean (complex |rho|)       +1.000000   +0.999988
+  WB Jam vs Clean (real-part rho)       -0.885773   -0.599588
+
+  Decorrelation Assessment:
+  [PASS] Ref (WB Jammer, complex): rho = 1.000000
+  [PASS] Sur (WB Jammer, complex): rho = 0.999988
+
+  Q-CHANNEL ANALYSIS (I/Q integrity check)
+  If Q=0 in jammer runs, the signal is real-valued and will
+  produce mirrored +/- Doppler lines in the ARD.
+
+  Signal                        P(I)            P(Q)   Q/I Ratio
+  ------                        ----            ----   ---------
+  Clean Ref             5.567605e-07    5.568759e-07    1.000207
+  Clean Sur             5.565466e-10    5.567696e-10    1.000401
+  WB Jam Ref            1.199143e-09    1.198796e-09    0.999711
+  WB Jam Sur            7.213535e-10    7.210247e-10    0.999544
+
+  CLIPPING / SATURATION CHECK
+  Clean Ref           Peak |I|: 1.399742e-03   Peak |Q|: 1.391925e-03
+  Clean Sur           Peak |I|: 4.598354e-05   Peak |Q|: 4.588110e-05
+  WB Jam Ref          Peak |I|: 6.599602e-05   Peak |Q|: 6.171216e-05
+  WB Jam Sur          Peak |I|: 5.003155e-05   Peak |Q|: 4.784969e-05
+
+---
+
+CORRELATION ANALYSIS BETWEEN CleanSingleTarget_no_rand and JamSingleTarget_no_rand:
+FERS Simulator Bug Detection (fullscale-corrected, complex IQ)
+Loading Clean scenario...
+  Loaded AnalysisChain/Input/CleanSingleTarget_no_rand/ArmasuisseRefRxClean.h5  (36864000 samples, fullscale = 6.599613e-05)
+  Loaded AnalysisChain/Input/CleanSingleTarget_no_rand/ArmasuisseSurRxClean.h5  (36864000 samples, fullscale = 5.002024e-05)
+Loading Wideband Jammer scenario...
+  Loaded AnalysisChain/Input/JamSingleTarget_no_rand/ArmasuisseRefRxJam.h5  (36864000 samples, fullscale = 7.873013e-05)
+  Loaded AnalysisChain/Input/JamSingleTarget_no_rand/ArmasuisseSurRxJam.h5  (36864000 samples, fullscale = 6.499626e-05)
+
+--- Fullscale Attributes (ADC-to-Physical Scaling) ---
+  Clean   Ref: 6.599613e-05    Sur: 5.002024e-05
+  WB Jam  Ref: 7.873013e-05    Sur: 6.499626e-05
+  [NOTE] Ref fullscale differs between Clean and WB Jammer by 19.3%
+
+  POWER ANALYSIS (fullscale-corrected, complex magnitude)
+  Power = var(real) + var(imag) of the scaled complex signal
+
+                                       Reference    Surveillance
+                                       ---------    ------------
+  Clean (FM only)                   2.397939e-09    1.442378e-09
+  Wideband Jammer (FM+1W)           2.547649e-09    1.623894e-09
+
+  Delta Power (Jammer - Clean):
+  Wideband Jammer                  +1.497105e-10   +1.815162e-10
+
+  Percentage Change:
+  Wideband Jammer                         +6.24%          +12.58%
+
+  Superposition Check:
+  [PASS] Ref power increased or unchanged with wideband jammer
+  [PASS] Sur power increased or unchanged with wideband jammer
+
+  CORRELATION ANALYSIS (fullscale-corrected)
+  Expected: rho > 0.99 if FERS sums signals correctly
+  (16kW FM dominates; 1W jammer is negligible at Ref Rx)
+
+  Comparison                              Ref rho     Sur rho
+                                          -------     -------
+  WB Jam vs Clean (complex |rho|)       +0.970032   +0.942538
+  WB Jam vs Clean (real-part rho)       +0.970031   +0.942540
+
+  Decorrelation Assessment:
+  [FAIL] Ref (WB Jammer, complex): rho = 0.970032  (expected > 0.99)
+  [FAIL] Sur (WB Jammer, complex): rho = 0.942538  (expected > 0.99)
+
+  Q-CHANNEL ANALYSIS (I/Q integrity check)
+  If Q=0 in jammer runs, the signal is real-valued and will
+  produce mirrored +/- Doppler lines in the ARD.
+
+  Signal                        P(I)            P(Q)   Q/I Ratio
+  ------                        ----            ----   ---------
+  Clean Ref             1.199143e-09    1.198796e-09    0.999711
+  Clean Sur             7.213533e-10    7.210245e-10    0.999544
+  WB Jam Ref            1.273836e-09    1.273814e-09    0.999982
+  WB Jam Sur            8.121556e-10    8.117384e-10    0.999486
+
+  CLIPPING / SATURATION CHECK
+  Clean Ref           Peak |I|: 6.599613e-05   Peak |Q|: 6.170622e-05
+  Clean Sur           Peak |I|: 5.001871e-05   Peak |Q|: 4.785261e-05
+  WB Jam Ref          Peak |I|: 7.873013e-05   Peak |Q|: 7.781472e-05
+  WB Jam Sur          Peak |I|: 6.499626e-05   Peak |Q|: 6.475824e-05
