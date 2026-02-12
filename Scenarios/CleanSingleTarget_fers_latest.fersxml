@@ -15,18 +15,10 @@
         <carrier_frequency>89e6</carrier_frequency>
         <pulsed_from_file filename="Waveforms/txWaveFormNormalised.h5"/>
     </waveform>
-    <waveform name="JammerWaveform">
-        <power>1</power>
-        <carrier_frequency>89e6</carrier_frequency>
-        <pulsed_from_file filename="Waveforms/jammerWaveFormNormalised.h5"/>
-    </waveform>
     <timing name="TxClock">
         <frequency>204800</frequency>
     </timing>
     <timing name="RxClock">
-        <frequency>204800</frequency>
-    </timing>
-    <timing name="JammerClock">
         <frequency>204800</frequency>
     </timing>
     <antenna name="RxYagiAntenna" pattern="sinc">
@@ -135,32 +127,5 @@
                 <value>200</value>
             </rcs>
         </target>
-    </platform>
-    <platform name="target1PlatformAux">
-        <motionpath interpolation="linear">
-            <positionwaypoint>
-                <x>331995.27</x> <!-- 0.5 m offset from target-->
-                <y>6291261.10</y>
-                <altitude>10000.00</altitude>
-                <time>0</time>
-            </positionwaypoint>
-            <positionwaypoint>
-                <x>305242.06</x> <!-- 0.5 m offset from target-->
-                <y>6267172.40</y>
-                <altitude>5000.00</altitude>
-                <time>180</time>
-            </positionwaypoint>
-        </motionpath>
-        <fixedrotation>
-            <startazimuth>0.0</startazimuth>
-            <startelevation>0.0</startelevation>
-            <azimuthrate>0</azimuthrate>
-            <elevationrate>0</elevationrate>
-        </fixedrotation>
-        <transmitter name="JammerTx" antenna="JammingIsoAntenna" waveform="JammerWaveform" timing="JammerClock">
-            <pulsed_mode>
-                <prf>0.001</prf>
-            </pulsed_mode>
-        </transmitter>
     </platform>
 </simulation>

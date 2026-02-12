@@ -11,38 +11,38 @@ implemented in the simulator source code.
 
 ### Nodes and Positions (UTM coordinates, metres)
 
-| Node                         | X          | Y            | Altitude (m) | Role                        |
-| ---------------------------- | ---------- | ------------ | ------------- | --------------------------- |
-| **Constantiaberg FM Tx**     | 258 804.41 | 6 228 720.84 | 397           | FM transmitter (continuous) |
-| **Armasuisse Ref Rx**        | 287 942.01 | 6 297 267.09 | 241           | Reference receiver          |
-| **Armasuisse Sur Rx**        | 287 946.01 | 6 297 267.09 | 241           | Surveillance receiver       |
-| **Target** (t = 0)           | 331 995.77 | 6 291 261.10 | 10 000        | Bistatic target (σ = 200 m²)|
-| **Jammer** (t = 0)           | 331 995.27 | 6 291 261.10 | 10 000        | Co-located with target      |
+| Node                     | X          | Y            | Altitude (m) | Role                         |
+| ------------------------ | ---------- | ------------ | ------------ | ---------------------------- |
+| **Constantiaberg FM Tx** | 258 804.41 | 6 228 720.84 | 397          | FM transmitter (continuous)  |
+| **Armasuisse Ref Rx**    | 287 942.01 | 6 297 267.09 | 241          | Reference receiver           |
+| **Armasuisse Sur Rx**    | 287 946.01 | 6 297 267.09 | 241          | Surveillance receiver        |
+| **Target** (t = 0)       | 331 995.77 | 6 291 261.10 | 10 000       | Bistatic target (σ = 200 m²) |
+| **Jammer** (t = 0)       | 331 995.27 | 6 291 261.10 | 10 000       | Co-located with target       |
 
 ### Transmitter Parameters
 
-| Transmitter    | Power (W) | Power (dBW) | Carrier (MHz) | Tx Antenna    |
-| -------------- | --------- | ----------- | ------------- | ------------- |
-| FM Tx          | 16 400    | +42.15      | 89            | Isotropic     |
-| Jammer Tx      | 1         | 0           | 89            | Isotropic     |
+| Transmitter | Power (W) | Power (dBW) | Carrier (MHz) | Tx Antenna |
+| ----------- | --------- | ----------- | ------------- | ---------- |
+| FM Tx       | 16 400    | +42.15      | 89            | Isotropic  |
+| Jammer Tx   | 1         | 0           | 89            | Isotropic  |
 
 ### Receiver Antenna Parameters
 
 Both receivers use the same `sinc` pattern antenna (`RxYagiAntenna`):
 
-| Parameter   | Value   | Meaning                          |
-| ----------- | ------- | -------------------------------- |
-| `alpha` (α) | 5.2481  | Peak gain (linear) ≈ 7.2 dBi    |
-| `beta` (β)  | 2       | Beamwidth parameter              |
-| `gamma` (γ) | 3.6     | Sidelobe roll-off exponent       |
-| efficiency  | 1.0     | No ohmic losses                  |
+| Parameter   | Value  | Meaning                      |
+| ----------- | ------ | ---------------------------- |
+| `alpha` (α) | 5.2481 | Peak gain (linear) ≈ 7.2 dBi |
+| `beta` (β)  | 2      | Beamwidth parameter          |
+| `gamma` (γ) | 3.6    | Sidelobe roll-off exponent   |
+| efficiency  | 1.0    | No ohmic losses              |
 
 ### Receiver Boresight Directions
 
-| Receiver   | Azimuth (°) | Elevation (°) | Points toward                    |
-| ---------- | ----------- | ------------- | -------------------------------- |
-| **Ref Rx** | 204.2       | 0.0           | FM Tx (Constantiaberg)           |
-| **Sur Rx** | 125.0       | 10.0          | Middle of target flight path     |
+| Receiver   | Azimuth (°) | Elevation (°) | Points toward                |
+| ---------- | ----------- | ------------- | ---------------------------- |
+| **Ref Rx** | 204.2       | 0.0           | FM Tx (Constantiaberg)       |
+| **Sur Rx** | 125.0       | 10.0          | Middle of target flight path |
 
 ### Derived Constants
 
@@ -115,15 +115,15 @@ R_FM→Tgt = √(73191.36² + 62540.26² + 9603²) = 96 751 m ≈ 96.8 km
 
 ### Distance Summary
 
-| Path                | Distance (m) | Distance (km) |
-| ------------------- | ------------ | -------------- |
-| FM Tx → Ref Rx      | 74 483       | 74.5           |
-| FM Tx → Sur Rx      | 74 484       | 74.5           |
-| Jammer → Ref Rx     | 45 519       | 45.5           |
-| Jammer → Sur Rx     | 45 516       | 45.5           |
-| FM Tx → Target      | 96 751       | 96.8           |
-| Target → Ref Rx     | 45 519       | 45.5           |
-| Target → Sur Rx     | 45 516       | 45.5           |
+| Path            | Distance (m) | Distance (km) |
+| --------------- | ------------ | ------------- |
+| FM Tx → Ref Rx  | 74 483       | 74.5          |
+| FM Tx → Sur Rx  | 74 484       | 74.5          |
+| Jammer → Ref Rx | 45 519       | 45.5          |
+| Jammer → Sur Rx | 45 516       | 45.5          |
+| FM Tx → Target  | 96 751       | 96.8          |
+| Target → Ref Rx | 45 519       | 45.5          |
+| Target → Sur Rx | 45 516       | 45.5          |
 
 ### 2.2 Azimuth and Elevation from Receivers to Sources
 
@@ -399,12 +399,12 @@ Target/Jammer direction over the FM Tx direction (+4.86 − (−22.8) = 27.7 dB)
 
 **FSPL = (λ / 4πR)²**
 
-| Path              | R (m)  | (λ/4πR)²       | FSPL (dB)  |
-| ----------------- | ------ | --------------- | ---------- |
-| FM Tx → Ref Rx    | 74 483 | 1.295 × 10⁻¹¹  | −108.88    |
-| FM Tx → Sur Rx    | 74 484 | 1.295 × 10⁻¹¹  | −108.88    |
-| Jammer → Ref Rx   | 45 519 | 3.466 × 10⁻¹¹  | −104.60    |
-| Jammer → Sur Rx   | 45 516 | 3.466 × 10⁻¹¹  | −104.60    |
+| Path            | R (m)  | (λ/4πR)²      | FSPL (dB) |
+| --------------- | ------ | ------------- | --------- |
+| FM Tx → Ref Rx  | 74 483 | 1.295 × 10⁻¹¹ | −108.88   |
+| FM Tx → Sur Rx  | 74 484 | 1.295 × 10⁻¹¹ | −108.88   |
+| Jammer → Ref Rx | 45 519 | 3.466 × 10⁻¹¹ | −104.60   |
+| Jammer → Sur Rx | 45 516 | 3.466 × 10⁻¹¹ | −104.60   |
 
 ```/dev/null/calc.txt#L1-5
 Example calculation for FM Tx → Ref Rx:
@@ -465,6 +465,38 @@ P_Jam_direct_ref = 1 × 1 × 0.004837 × 3.466 × 10⁻¹¹
                  = −127.8 dBW
 ```
 
+#### Jammer Echo (via Target) → Ref Rx
+
+The jammer is co-located with the target platform with a 0.5 m offset in `x` (same `y` and altitude), so:
+
+```/dev/null/calc.txt#L1-4
+R_Jam→Tgt = 0.5 m
+R_Tgt→Ref = 45 519 m
+σ = 200 m²
+```
+
+Using the bistatic radar equation with the jammer as the illuminator:
+
+```/dev/null/calc.txt#L1-18
+P_t = 1 W,  G_t = 1,  σ = 200 m²
+G_r = 0.004837  (Ref Rx toward Target/Jammer direction)
+R_tx = 0.5 m     (Jammer → Target)
+R_rx = 45 519 m  (Target → Ref Rx)
+
+Numerator:
+  1 × 1 × 0.004837 × 200 × 11.346 = 10.98
+
+Denominator:
+  (4π)³ × R_tx² × R_rx²
+  = 1984.4 × (0.5)² × (45 519)²
+  = 1984.4 × 0.25 × 2.072 × 10⁹
+  = 1.028 × 10¹²
+
+P_Jam_echo_ref = 10.98 / 1.028 × 10¹² = 1.07 × 10⁻¹¹ W
+
+                 = −109.7 dBW
+```
+
 #### FM Echo (via Target) → Ref Rx
 
 ```/dev/null/calc.txt#L1-15
@@ -489,13 +521,14 @@ P_echo_ref = 179 850 / 3.849 × 10²² = 4.67 × 10⁻¹⁸ W
 
 #### Reference Rx Summary
 
-| Signal              | Power (W)          | Power (dBW) |
-| ------------------- | ------------------ | ----------- |
-| **FM direct**       | **1.113 × 10⁻⁶**  | **−59.5**   |
-| **Jammer direct**   | **1.676 × 10⁻¹³** | **−127.8**  |
-| **FM echo (target)**| **4.67 × 10⁻¹⁸**  | **−173.3**  |
+| Signal                   | Power (W)         | Power (dBW) |
+| ------------------------ | ----------------- | ----------- |
+| **FM direct**            | **1.113 × 10⁻⁶**  | **−59.5**   |
+| **Jammer direct**        | **1.676 × 10⁻¹³** | **−127.8**  |
+| **Jammer echo (target)** | **1.07 × 10⁻¹¹**  | **−109.7**  |
+| **FM echo (target)**     | **4.67 × 10⁻¹⁸**  | **−173.3**  |
 
-**Jammer-to-FM ratio at Reference Rx:**
+**Jammer-to-FM ratio at Reference Rx (direct path only):**
 
 ```/dev/null/calc.txt#L1-3
 1.676 × 10⁻¹³  /  1.113 × 10⁻⁶  =  1.506 × 10⁻⁷
@@ -534,6 +567,38 @@ P_Jam_direct_sur = 1 × 1 × 3.062 × 3.466 × 10⁻¹¹
                  = −99.7 dBW
 ```
 
+#### Jammer Echo (via Target) → Sur Rx
+
+As for the reference channel, the jammer and target are separated by 0.5 m (static offset in `x`):
+
+```/dev/null/calc.txt#L1-4
+R_Jam→Tgt = 0.5 m
+R_Tgt→Sur = 45 516 m
+σ = 200 m²
+```
+
+Using the bistatic radar equation with the jammer as illuminator:
+
+```/dev/null/calc.txt#L1-18
+P_t = 1 W,  G_t = 1,  σ = 200 m²
+G_r = 3.062  (Sur Rx toward Target/Jammer direction)
+R_tx = 0.5 m     (Jammer → Target)
+R_rx = 45 516 m  (Target → Sur Rx)
+
+Numerator:
+  1 × 1 × 3.062 × 200 × 11.346 = 6 946
+
+Denominator:
+  (4π)³ × R_tx² × R_rx²
+  = 1984.4 × (0.5)² × (45 516)²
+  = 1984.4 × 0.25 × 2.072 × 10⁹
+  = 1.028 × 10¹²
+
+P_Jam_echo_sur = 6 946 / 1.028 × 10¹² = 6.75 × 10⁻⁹ W
+
+                 = −81.7 dBW
+```
+
 #### FM Echo (via Target) → Sur Rx
 
 ```/dev/null/calc.txt#L1-15
@@ -557,13 +622,14 @@ P_echo_sur = 1.140 × 10⁸ / 3.849 × 10²² = 2.96 × 10⁻¹⁵ W
 
 #### Surveillance Rx Summary
 
-| Signal              | Power (W)          | Power (dBW) |
-| ------------------- | ------------------ | ----------- |
-| **FM direct (DSI)** | **1.110 × 10⁻⁹**  | **−89.5**   |
-| **Jammer direct**   | **1.061 × 10⁻¹⁰** | **−99.7**   |
-| **FM echo (target)**| **2.96 × 10⁻¹⁵**  | **−145.3**  |
+| Signal                   | Power (W)         | Power (dBW) |
+| ------------------------ | ----------------- | ----------- |
+| **FM direct (DSI)**      | **1.110 × 10⁻⁹**  | **−89.5**   |
+| **Jammer direct**        | **1.061 × 10⁻¹⁰** | **−99.7**   |
+| **Jammer echo (target)** | **6.75 × 10⁻⁹**   | **−81.7**   |
+| **FM echo (target)**     | **2.96 × 10⁻¹⁵**  | **−145.3**  |
 
-**Jammer-to-FM ratio at Surveillance Rx:**
+**Jammer-to-FM ratio at Surveillance Rx (direct path only):**
 
 ```/dev/null/calc.txt#L1-3
 1.061 × 10⁻¹⁰  /  1.110 × 10⁻⁹  =  0.0956
@@ -621,19 +687,19 @@ Net FM advantage at Sur Rx:                                         10.2 dB
 
 ### All Six Signal Powers
 
-| Signal                     | Ref Rx (dBW) | Ref Rx (W)          | Sur Rx (dBW) | Sur Rx (W)          |
-| -------------------------- | ------------ | ------------------- | ------------ | ------------------- |
-| **FM direct**              | **−59.5**    | **1.113 × 10⁻⁶**   | **−89.5**    | **1.110 × 10⁻⁹**   |
-| **Jammer direct**          | **−127.8**   | **1.676 × 10⁻¹³**  | **−99.7**    | **1.061 × 10⁻¹⁰**  |
-| **FM echo (via target)**   | **−173.3**   | **4.67 × 10⁻¹⁸**   | **−145.3**   | **2.96 × 10⁻¹⁵**   |
+| Signal                   | Ref Rx (dBW) | Ref Rx (W)        | Sur Rx (dBW) | Sur Rx (W)        |
+| ------------------------ | ------------ | ----------------- | ------------ | ----------------- |
+| **FM direct**            | **−59.5**    | **1.113 × 10⁻⁶**  | **−89.5**    | **1.110 × 10⁻⁹**  |
+| **Jammer direct**        | **−127.8**   | **1.676 × 10⁻¹³** | **−99.7**    | **1.061 × 10⁻¹⁰** |
+| **FM echo (via target)** | **−173.3**   | **4.67 × 10⁻¹⁸**  | **−145.3**   | **2.96 × 10⁻¹⁵**  |
 
 ### Signal Ratios
 
-| Ratio                         | Reference Rx | Surveillance Rx |
-| ----------------------------- | ------------ | --------------- |
-| FM direct / Jammer direct     | +68.2 dB     | +10.2 dB        |
-| FM direct / FM echo           | +113.8 dB    | +55.8 dB        |
-| Jammer direct / FM echo       | +45.5 dB     | +45.6 dB        |
+| Ratio                     | Reference Rx | Surveillance Rx |
+| ------------------------- | ------------ | --------------- |
+| FM direct / Jammer direct | +68.2 dB     | +10.2 dB        |
+| FM direct / FM echo       | +113.8 dB    | +55.8 dB        |
+| Jammer direct / FM echo   | +45.5 dB     | +45.6 dB        |
 
 ### Fractional Power Contribution of Jammer
 
@@ -680,22 +746,22 @@ For reference, the FERS sinc antenna gain G(θ) = 5.2481 × |sin(2θ)/(2θ)|^3.6
 angles off boresight:
 
 | θ (deg) | θ (rad) | sin(2θ)/(2θ) | G (linear) | G (dBi) |
-| ------- | ------- | ------------- | ---------- | -------- |
-| 0       | 0       | 1.000         | 5.248      | +7.20    |
-| 1       | 0.0175  | 0.9998        | 5.244      | +7.20    |
-| 5       | 0.0873  | 0.9949        | 5.153      | +7.12    |
-| 10      | 0.1745  | 0.9797        | 4.876      | +6.88    |
-| 20      | 0.3491  | 0.9194        | 3.864      | +5.87    |
-| 30      | 0.5236  | 0.8270        | 2.676      | +4.27    |
-| 45      | 0.7854  | 0.6496        | 1.098      | +0.41    |
-| 60      | 1.0472  | 0.4546        | 0.303      | −5.19    |
-| 75      | 1.3090  | 0.2728        | 0.058      | −12.4    |
-| 90      | 1.5708  | 0.1273        | 0.00462    | −23.4    |
-| 106     | 1.8500  | 0.1436        | 0.00486    | −23.1    |
-| 120     | 2.0944  | 0.2081        | 0.0257     | −15.9    |
-| 135     | 2.3562  | 0.1667        | 0.0109     | −19.6    |
-| 150     | 2.6180  | 0.0620        | 0.000303   | −35.2    |
-| 180     | 3.1416  | 0.0000        | 0.000      | −∞       |
+| ------- | ------- | ------------ | ---------- | ------- |
+| 0       | 0       | 1.000        | 5.248      | +7.20   |
+| 1       | 0.0175  | 0.9998       | 5.244      | +7.20   |
+| 5       | 0.0873  | 0.9949       | 5.153      | +7.12   |
+| 10      | 0.1745  | 0.9797       | 4.876      | +6.88   |
+| 20      | 0.3491  | 0.9194       | 3.864      | +5.87   |
+| 30      | 0.5236  | 0.8270       | 2.676      | +4.27   |
+| 45      | 0.7854  | 0.6496       | 1.098      | +0.41   |
+| 60      | 1.0472  | 0.4546       | 0.303      | −5.19   |
+| 75      | 1.3090  | 0.2728       | 0.058      | −12.4   |
+| 90      | 1.5708  | 0.1273       | 0.00462    | −23.4   |
+| 106     | 1.8500  | 0.1436       | 0.00486    | −23.1   |
+| 120     | 2.0944  | 0.2081       | 0.0257     | −15.9   |
+| 135     | 2.3562  | 0.1667       | 0.0109     | −19.6   |
+| 150     | 2.6180  | 0.0620       | 0.000303   | −35.2   |
+| 180     | 3.1416  | 0.0000       | 0.000      | −∞      |
 
 Note: The sinc pattern has sidelobes, so the gain is not monotonically decreasing. At
 θ ≈ 106°, the gain is approximately the same magnitude as at θ ≈ 90° — both sit in the
