@@ -1,8 +1,9 @@
-I have now done some further analyses to refine the results. Please add an addendum to the previous discussion and analysis you provided above which discusses and analyzes the following results.
+I have now done some further analyses to refine the results. Please add an addendum to the previous discussion and analysis you provided above which discusses and analyses the following results. Use similar langauge as before.
 
 ALSO NOTE:
 
 - On the point `Re-examine the scenario that led to the paper retraction`, all of the scenarios I have been testing on is the scenario that led to paper retraction.
+- This particular post-processing pipeline was designed for the old FERS, but the FERS outputs are backwards/forwards compatible.
 
 ---
 
@@ -15,11 +16,11 @@ At a jammer power of 100 µW, the target is very easily identifiable in the plot
 
 DSI suppression achieved by the CGLS cancellation:
 
-IN OLD FERS:
+IN OLD FERS using CleanSingleTarget Scenario:
 Mean DSI Suppression: 69.06 dB
 Std Dev: 8.51 dB
 
-IN NEW FERS:
+IN NEW FERS using CleanSingleTarget Scenario:
 Mean DSI Suppression: 49.56 dB
 Std Dev: 3.41 dB
 
