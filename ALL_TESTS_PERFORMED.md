@@ -65,6 +65,14 @@
 #### Results:
 - Entire plot is very high average power noise with the average being around maybe -7 dB for all ranges and dopplers
 
+### JamSingleTarget_fers_latest_proper_colocation
+
+#### Notes:
+- Identical to JamSingleTarget_fers_latest, but the underlying simulation code was modified to ensure that the jammer does not echo off the target (i.e. only the direct path from jammer to receivers are simulated).
+
+#### Results:
+- Identical result to JamSingleTarget_fers_latest
+
 ### JamSingleTarget_fers_latest_low_power
 
 #### Notes:
@@ -138,6 +146,14 @@
 - No random_freq_offset and no noise_temp.
 - Jammer was co-located with the target.
 - Jammer power was set to 1 W.
+
+### JamSingleTarget_proper_colocation
+
+#### Notes:
+- Identical to JamSingleTarget_no_rand, but the underlying simulation code was modified to ensure that the jammer does not echo off the target (i.e. only the direct path from jammer to receivers are simulated).
+
+#### Results:
+- Identical result to JamSingleTarget_no_rand
 
 #### Results:
 - Average power level is around -20 dB with no visible target, just noise

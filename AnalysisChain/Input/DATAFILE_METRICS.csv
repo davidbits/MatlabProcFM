@@ -25,3 +25,7 @@ Input/JamSingleTarget_no_rand/ArmasuisseRefRxJam.h5,1.273814e-09,1.273836e-09
 Input/JamSingleTarget_no_rand/ArmasuisseSurRxJam.h5,8.117384e-10,8.121556e-10
 Input/JamSingleTarget_stationary_jam/ArmasuisseRefRx.h5,1.276909e-09,1.277249e-09
 Input/JamSingleTarget_stationary_jam/ArmasuisseSurRx.h5,7.573527e-10,7.576896e-10
+Input/JamSingleTarget_fers_latest_proper_colocation/ArmasuisseRefRx_results.h5,5.568776e-07,5.567635e-07
+Input/JamSingleTarget_fers_latest_proper_colocation/ArmasuisseSurRx_results.h5,6.734603e-10,6.731544e-10
+Input/JamSingleTarget_proper_colocation/ArmasuisseRefRx.h5,1.253613e-09,1.253729e-09
+Input/JamSingleTarget_proper_colocation/ArmasuisseSurRx.h5,8.026201e-10,8.030559e-10

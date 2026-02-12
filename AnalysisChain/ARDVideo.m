@@ -23,10 +23,12 @@ clear; clc; close all;
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1uw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1uw';
-targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1mw';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1mw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1mw';
+targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_100uw';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_100uw';
 
-DB_LEVEL = -10;
+DB_LEVEL = -40;
 
 % Output Videos
 videoFolder = 'Videos';
@@ -59,7 +61,7 @@ if ispc || ismac
     outputFilename = fullfile(videoFolder, sprintf('%s_ard_video.mp4', sanitizedTarget));
     profile = 'MPEG-4';
 else
-    outputFilename = fullfile(videoFolder, sprintf('%s_ard_video.avi', sanitizedTarget));
+    outputFilename = fullfile(videoFolder, sprintf('%ddb_%s_ard_video.avi', -DB_LEVEL, sanitizedTarget));
     profile = 'Motion JPEG AVI';
 end
 

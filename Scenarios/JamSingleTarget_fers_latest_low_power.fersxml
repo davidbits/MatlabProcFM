@@ -16,7 +16,7 @@
         <pulsed_from_file filename="Waveforms/txWaveFormNormalised.h5"/>
     </waveform>
     <waveform name="JammerWaveform">
-        <power>1</power>
+        <power>1e-4</power>
         <carrier_frequency>89e6</carrier_frequency>
         <pulsed_from_file filename="Waveforms/jammerWaveFormNormalised.h5"/>
     </waveform>

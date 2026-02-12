@@ -4,36 +4,36 @@
     <parameters>
         <starttime>0</starttime>
         <endtime>180</endtime>
-        <c>299792458</c>
         <rate>204800</rate>
+        <c>299792458</c>
+        <simSamplingRate>1000</simSamplingRate>
         <adc_bits>16</adc_bits>
-        <interprate>1000</interprate>
         <oversample>1</oversample>
-        <export binary="true" csv="false" xml="false"/>
     </parameters>
-    <pulse name="TxWaveform" type="file" filename="Waveforms/txWaveFormNormalised.h5">
-        <power>16400</power> <!-- 10 kW * 2.15 dB (to create EIRP of dipole type pattern) -->
-        <carrier>89e6</carrier>
-    </pulse>
-    <pulse name="JammerWaveform" type="file" filename="Waveforms/jammerWaveFormNormalised.h5">
-        <power>1e-4</power>
-        <carrier>89e6</carrier>
-    </pulse>
+    <waveform name="TxWaveform">
+        <power>16400</power>
+        <carrier_frequency>89e6</carrier_frequency>
+        <pulsed_from_file filename="Waveforms/txWaveFormNormalised.h5"/>
+    </waveform>
+    <waveform name="JammerWaveform">
+        <power>1</power>
+        <carrier_frequency>89e6</carrier_frequency>
+        <pulsed_from_file filename="Waveforms/jammerWaveFormNormalised.h5"/>
+    </waveform>
     <timing name="TxClock">
         <frequency>204800</frequency>
     </timing>
     <timing name="RxClock">
         <frequency>204800</frequency>
-        <!--<random_freq_offset>0.01</random_freq_offset>-->
     </timing>
     <timing name="JammerClock">
         <frequency>204800</frequency>
     </timing>
     <antenna name="RxYagiAntenna" pattern="sinc">
-        <efficiency>1</efficiency>
-        <alpha>5.2481</alpha><!-- 7.2 dBi -->
+        <alpha>5.2481</alpha>
         <beta>2</beta>
         <gamma>3.6</gamma>
+        <efficiency>1</efficiency>
     </antenna>
     <antenna name="TxIsoAntenna" pattern="isotropic">
         <efficiency>1</efficiency>
@@ -57,8 +57,10 @@
             <azimuthrate>0</azimuthrate>
             <elevationrate>0</elevationrate>
         </fixedrotation>
-        <transmitter name="ConstantiabergTx" type="continuous" antenna="TxIsoAntenna" pulse="TxWaveform" timing="TxClock">
-            <prf>0.001</prf>
+        <transmitter name="ConstantiabergTx" antenna="TxIsoAntenna" waveform="TxWaveform" timing="TxClock">
+            <pulsed_mode>
+                <prf>0.001</prf>
+            </pulsed_mode>
         </transmitter>
     </platform>
     <platform name="ArmasuisseRefRxPlatform">
@@ -76,11 +78,12 @@
             <azimuthrate>0</azimuthrate>
             <elevationrate>0</elevationrate>
         </fixedrotation>
-        <receiver name="ArmasuisseRefRx" type="continuous" antenna="RxYagiAntenna" timing="RxClock">
-            <prf>0.001</prf>
-            <window_skip>0</window_skip>
-            <window_length>180</window_length>
-            <!--<noise_temp>438.4</noise_temp>--><!--4 dB NF as per the minimal frontend -->
+        <receiver name="ArmasuisseRefRx" antenna="RxYagiAntenna" timing="RxClock">
+            <pulsed_mode>
+                <prf>0.001</prf>
+                <window_skip>0</window_skip>
+                <window_length>180</window_length>
+            </pulsed_mode>
         </receiver>
     </platform>
     <platform name="ArmasuisseSurRxPlatform">
@@ -98,11 +101,12 @@
             <azimuthrate>0</azimuthrate>
             <elevationrate>0</elevationrate>
         </fixedrotation>
-        <receiver name="ArmasuisseSurRx" type="continuous" antenna="RxYagiAntenna" timing="RxClock">
-            <prf>0.001</prf>
-            <window_skip>0</window_skip>
-            <window_length>180</window_length>
-            <!--<noise_temp>438.4</noise_temp>--><!--4 dB NF as per the minimal frontend -->
+        <receiver name="ArmasuisseSurRx" antenna="RxYagiAntenna" timing="RxClock">
+            <pulsed_mode>
+                <prf>0.001</prf>
+                <window_skip>0</window_skip>
+                <window_length>180</window_length>
+            </pulsed_mode>
         </receiver>
     </platform>
     <platform name="target1Platform">
@@ -133,18 +137,12 @@
         </target>
     </platform>
     <platform name="target1PlatformAux">
-        <motionpath interpolation="linear">
+        <motionpath interpolation="static">
             <positionwaypoint>
                 <x>331995.27</x> <!-- 0.5 m offset from target-->
                 <y>6291261.10</y>
                 <altitude>10000.00</altitude>
                 <time>0</time>
-            </positionwaypoint>
-            <positionwaypoint>
-                <x>305242.06</x> <!-- 0.5 m offset from target-->
-                <y>6267172.40</y>
-                <altitude>5000.00</altitude>
-                <time>180</time>
             </positionwaypoint>
         </motionpath>
         <fixedrotation>
@@ -153,8 +151,10 @@
             <azimuthrate>0</azimuthrate>
             <elevationrate>0</elevationrate>
         </fixedrotation>
-        <transmitter name="JammerTx" type="continuous" antenna="JammingIsoAntenna" pulse="JammerWaveform" timing="JammerClock">
-            <prf>0.001</prf>
+        <transmitter name="JammerTx" antenna="JammingIsoAntenna" waveform="JammerWaveform" timing="JammerClock">
+            <pulsed_mode>
+                <prf>0.001</prf>
+            </pulsed_mode>
         </transmitter>
     </platform>
 </simulation>

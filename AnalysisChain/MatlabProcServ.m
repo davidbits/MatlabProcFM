@@ -12,7 +12,7 @@ close all;
 hdf5_input = 0;
 
 % The input file created by combineRxData.m
-InputRCFFilename = 'Input/JamSingleTarget_low_power_1mw/ArmasuisseJam.rcf';
+InputRCFFilename = 'Input/JamSingleTarget_fers_latest_low_power_100uw/ArmasuisseJam.rcf';
 InputHDF5Filename = 'RecordingName.h5';
 
 % --- Derived CPI Parameters from CleanSingleTarget.ard ---
@@ -78,6 +78,8 @@ CGLSAlpha = 0;
 
 fprintf('Total CPIs to process: %d\n', nCPIs);
 
+DSI_suppression_history = zeros(nCPIs, 1);
+
 for CPINo = 0:nCPIs - 1
 
     fprintf('Processing CPI %i of %i (Time: %.2fs):\n', CPINo + 1, nCPIs, CPINo * CPI_s);
@@ -101,10 +103,25 @@ for CPINo = 0:nCPIs - 1
 
     if(EnableCancellation)
         fprintf('\tDoing cancellation\n');
+
+        % Store pre-cancellation surveillance data
+        preCancelSurv = oCPIRCF.m_fvSurveillanceData;
+
+        % Calculate pre-cancellation power
+        preCancelPower = mean(abs(preCancelSurv).^2);
+
         tic
         [oCPIRCF, CGLSAlpha] = CGLS_Cancellation(oCPIRCF, CancellationMaxRange_m, CancallationMaxDoppler_Hz, TxToReferenceRxDistance_m, CancellationNSegments, CancellationNInterations, CGLSAlpha);
         %oCPIRCF = ECA_Cancellation(oCPIRCF, CancellationMaxRange_m, CancallationMaxDoppler_Hz, TxToReferenceRxDistance_m, CancellationNSegments);
         toc
+
+        % Calculate post-cancellation power
+        postCancelPower = mean(abs(oCPIRCF.m_fvSurveillanceData).^2);
+
+        % Calculate DSI suppression in dB
+        DSI_suppression_dB = 10 * log10(preCancelPower / postCancelPower);
+
+        DSI_suppression_history(CPINo + 1) = DSI_suppression_dB;
     end
 
     fprintf('\tDoing range/Doppler processing\n');
@@ -126,4 +143,13 @@ for CPINo = 0:nCPIs - 1
 
     fprintf('\n\n');
 
+end
+
+fprintf('\nMean DSI Suppression: %.2f dB\n', mean(DSI_suppression_history));
+fprintf('Std Dev: %.2f dB\n', std(DSI_suppression_history));
+
+% print all DSI suppression values
+fprintf('DSI Suppression per CPI:\n');
+for i = 1:length(DSI_suppression_history)
+    fprintf('CPI %d: %.2f dB\n', i, DSI_suppression_history(i));
 end
