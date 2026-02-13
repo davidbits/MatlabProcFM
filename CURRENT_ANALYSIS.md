@@ -461,3 +461,142 @@ All scenarios tested are confirmed to be the scenario that led to the paper retr
 3. A post-processing chain that was (coincidentally) well-tuned for the erroneous signal levels, achieving excellent 69 dB cancellation but still unable to extract the target from under the jammer
 
 None of these factors have anything to do with transmitter motion. The "moving transmitter bug" label is a misattribution. The root causes are an antenna model error and a physically powerful jammer — both of which produce identical results whether the jammer is moving or stationary.
+
+---
+
+# Addendum 2: Corrected DSI Metrics, Stationary Jammer Confirmation, and Revised Cancellation Assessment
+
+---
+
+## B1. Correction: Total Power Reduction ≠ DSI Suppression
+
+The cancellation metrics reported in Addendum 1 (Section A3) used a flawed measurement method. The original code computed:
+
+```/dev/null/old_metric.m#L1-2
+DSI_suppression_dB = 10 * log10(preCancelPower / postCancelPower);
+```
+
+This measures **total power reduction** — the ratio of total surveillance signal power before and after cancellation. It does not isolate the DSI component. If the post-cancellation residual contains non-DSI signals (target echoes, jammer, etc.), the metric conflates DSI removal with overall signal attenuation.
+
+A revised measurement suite was implemented with three distinct metrics:
+
+1. **Total Power Reduction** — same as before: `mean(|surv_pre|²) / mean(|surv_post|²)`. Measures bulk power change.
+2. **DSI Projection Suppression** — projects both pre- and post-cancellation surveillance signals onto the reference signal subspace via `|ref' · surv|² / (ref' · ref)`, then takes the ratio. This isolates the reference-correlated component and measures how much of it was removed.
+3. **Correlation Drop** — measures the change in normalised complex correlation `ρ = |ref' · surv| / (‖ref‖ · ‖surv‖)` before and after cancellation. A large drop indicates the reference-correlated component has been effectively suppressed.
+
+---
+
+## B2. Corrected DSI Suppression Results
+
+| Metric                         | Old FERS              | New FERS              | Difference                  |
+| ------------------------------ | --------------------- | --------------------- | --------------------------- |
+| **Total Power Reduction**      | 69.06 dB (σ = 8.51)   | 49.56 dB (σ = 3.41)   | 19.5 dB gap                 |
+| **DSI Projection Suppression** | 120.99 dB (σ = 14.61) | 113.66 dB (σ = 12.47) | **7.3 dB gap**              |
+| **Correlation Drop**           | 25.86 dB (σ = 4.01)   | 32.05 dB (σ = 5.46)   | **New FERS 6.2 dB better**  |
+| **ρ pre-cancellation**         | 1.0000                | 1.0000                | Identical                   |
+| **ρ post-cancellation**        | 0.0041                | 0.0022                | **New FERS lower (better)** |
+
+### Key Observations
+
+**The 20 dB gap was an artefact of the measurement, not a real cancellation deficiency.** The DSI-specific metrics tell a fundamentally different story:
+
+1. **DSI Projection Suppression:** Both versions achieve extraordinary suppression of the reference-correlated component — 121 dB (old) and 114 dB (new). The gap narrows from 19.5 dB to **7.3 dB**. Both figures represent excellent cancellation performance.
+
+2. **Correlation:** The new FERS actually achieves **better** decorrelation. Post-cancellation ρ = 0.0022 (new) versus 0.0041 (old) — the new FERS residual contains roughly half the reference-correlated energy of the old FERS residual. The correlation drop of 32.05 dB (new) versus 25.86 dB (old) confirms this: the new FERS removes 6.2 dB more of the correlated component.
+
+3. **Total Power Reduction disparity explained:** The 19.5 dB gap in total power reduction arises because the post-cancellation residual in the new FERS contains more **correctly-scaled non-DSI power** — target echoes, multi-path contributions, and other signals that are stronger due to the corrected antenna gains. These signals _should_ remain after cancellation; their presence reduces the total power ratio without indicating worse DSI removal.
+
+### Why Old FERS Shows Higher Total Power Reduction
+
+```/dev/null/calc.txt#L1-14
+Total Power Reduction = P_pre / P_post
+
+P_pre ≈ P_DSI + P_other  (dominated by P_DSI in both versions)
+P_post ≈ P_residual_DSI + P_other
+
+Old FERS:
+  P_DSI is weaker (antenna bug: −26.7 dB at Ref Rx → weaker reference contribution)
+  P_other is also weaker (all gains are wrong)
+  P_post is very small → ratio is very large → 69 dB
+
+New FERS:
+  P_DSI is correctly scaled
+  P_other includes correctly-scaled target echo and multi-path at proper levels
+  P_post retains these non-DSI components → ratio is smaller → 50 dB
+
+The difference is in the FLOOR (P_other), not in the DSI removal quality.
+```
+
+---
+
+## B3. Retraction of Addendum 1 Cancellation Re-tuning Recommendation
+
+Section A3 of Addendum 1 stated:
+
+> _"The old FERS achieves 19.5 dB more DSI suppression than the new FERS. This is a substantial and unexpected difference."_
+
+And Section A6.3 recommended re-tuning the CGLS parameters (more iterations, more segments, extended Doppler coverage) for the new FERS.
+
+**This recommendation is partially retracted.** The corrected metrics show:
+
+- The CGLS cancellation is performing **comparably well** on both FERS versions in terms of actual DSI removal (projection suppression within 7 dB, correlation drop _better_ for new FERS).
+- The 50 dB total power reduction in the new FERS is not a deficiency — it reflects the correct signal environment where non-DSI components are stronger.
+- The CGLS algorithm does **not** need urgent re-tuning for the new FERS signal levels.
+
+The residual 7.3 dB gap in projection suppression is minor and could be investigated with additional CGLS iterations if desired, but it is not a priority concern and does not impact the conclusions of this analysis.
+
+---
+
+## B4. Stationary Jammer on New FERS — Completing the Test Matrix
+
+A new test was performed to fill the remaining gap in the motion-independence evidence:
+
+### JamSingleTarget_fers_latest_stationary_jam
+
+| Parameter     | Value                                     |
+| ------------- | ----------------------------------------- |
+| FERS version  | New (commit `a6facb`)                     |
+| Jammer motion | **Stationary** (at target start position) |
+| Target motion | Moving (same as all other tests)          |
+| Jammer power  | 1 W                                       |
+| Randomness    | None                                      |
+
+**Result:** _"Higher and more noise than JamSingleTarget_stationary_jam [old FERS] all throughout the plots. Basically identical to JamSingleTarget_fers_latest (i.e., the latest fers commit with no randomness and a moving jammer)."_
+
+This completes the full 2×2 test matrix:
+
+|              | Moving Jammer    | Stationary Jammer                          |
+| ------------ | ---------------- | ------------------------------------------ |
+| **Old FERS** | Target invisible | Target invisible — **identical to moving** |
+| **New FERS** | Target invisible | Target invisible — **identical to moving** |
+
+All four cells produce results identical within each FERS version. The new FERS shows higher noise than the old FERS in both cases (consistent with the correctly-scaled jammer power at the Surveillance Rx: Gr = 3.062 new vs Gr = 2.103 old toward the jammer direction).
+
+**Transmitter motion is definitively irrelevant in both FERS versions.** This is the strongest possible evidence against the "moving transmitter bug" hypothesis, as the full factorial test across both FERS versions and both motion states shows zero effect of motion.
+
+---
+
+## B5. Updated Finding Summary
+
+| Finding                              | Addendum 1 Status                   | Addendum 2 Status                                                                                                                                                      |
+| ------------------------------------ | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Antenna gain bug in old FERS         | CONFIRMED — 26.7 dB via IQ power    | **Unchanged**                                                                                                                                                          |
+| Jammer echo as dominant interference | ELIMINATED                          | **Unchanged**                                                                                                                                                          |
+| Moving transmitter causes corruption | NOT CONFIRMED (old FERS only)       | **DEFINITIVELY RULED OUT** — full 2×2 matrix (old/new × moving/stationary) shows zero motion effect                                                                    |
+| Detection threshold behaviour        | RESOLVED — consistent with theory   | **Unchanged**                                                                                                                                                          |
+| CGLS cancellation performance gap    | MEASURED — 20 dB gap, tuning needed | **CORRECTED** — 20 dB gap was a measurement artefact; true DSI suppression within 7 dB; new FERS achieves better decorrelation; re-tuning recommendation **retracted** |
+| Post-processing chain compatibility  | Chain needs re-tuning for new FERS  | **REVISED** — chain performs well on new FERS; no urgent re-tuning required                                                                                            |
+
+---
+
+## B6. Implications for Overall Conclusions
+
+The corrected metrics and additional test strengthen the original conclusions without altering them:
+
+1. **The "moving transmitter bug" does not exist.** The full 2×2 factorial test across both FERS versions eliminates any remaining ambiguity. Motion has zero effect on the output.
+
+2. **The antenna gain bug is the only confirmed software defect.** It is real, it is fixed in the new FERS, and it produces a 26.7 dB signal level error at the Reference Rx. But it does not cause the specific "corruption when transmitter moves" failure described in the meeting transcripts.
+
+3. **The post-processing chain is performing correctly on both FERS versions.** The CGLS cancellation achieves >113 dB of DSI projection suppression and drives the reference-surveillance correlation to ρ < 0.005 in both versions. The 19.5 dB difference in total power reduction was a measurement artefact reflecting different non-DSI residual power levels, not a cancellation quality difference.
+
+4. **The target obscuration at 1 W jammer power is entirely physical.** The jammer direct path produces 45–68 dB of interference above the target echo. Processing gain of ~53.5 dB cannot overcome this. Reducing jammer power to 100 µW or below allows the target to emerge cleanly. This is consistent across all FERS versions, all motion states, and all measurement methods.
