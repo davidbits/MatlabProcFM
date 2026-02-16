@@ -8,7 +8,7 @@ clc;
 close all;
 
 % The input file created by combineRxData.m
-InputRCFFilename = 'Input/JamSingleTarget_fers_latest_jam_only/ArmasuisseJam.rcf';
+InputRCFFilename = 'Input/JamSingleTarget_oldest_no_rand/ArmasuisseJam.rcf';
 
 CPI_s = 4.000; % CPI Duration
 

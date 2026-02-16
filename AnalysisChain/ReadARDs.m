@@ -12,7 +12,9 @@ clear; clc; close all;
 %ARD_File = 'Ref_Outputs/Latest_FIXED_CleanSingleTarget_no_rand/16.ard';
 %ARD_File = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_tone_stationary_jam/16.ard';
 %ARD_File = 'Ref_Outputs/CleanSingleTarget/1970-01-01T02.01.00.000000.ard';
-ARD_File = 'Output/7.ard';
+ARD_File = 'Ref_Outputs/JamSingleTarget_oldest_no_rand/16.ard';
+ARD_File = 'Ref_Outputs/JamSingleTarget_oldest_no_rand_stationary/16.ard';
+%ARD_File = 'Output/7.ard';
 
 % something funky happens at ard index 38 or 152s
 

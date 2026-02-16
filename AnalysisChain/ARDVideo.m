@@ -27,9 +27,9 @@ clear; clc; close all;
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1mw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_100uw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_100uw';
-targetFolder = 'Output';
+targetFolder = 'Ref_Outputs/JamSingleTarget_oldest_no_rand_stationary';
 
-DB_LEVEL = -40;
+DB_LEVEL = -20;
 
 % Output Videos
 videoFolder = 'Videos';

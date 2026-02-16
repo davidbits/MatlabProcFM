@@ -1,0 +1,17 @@
+tested with fers (v23) from 2017 (oldest compilable version)
+
+moving jammer, no rand:
+Mean Total Power Reduction: 6.67 dB (Std: 1.66 dB)
+Mean DSI Projection Suppression: 65.54 dB (Std: 7.95 dB)
+Mean Correlation Drop: 29.44 dB (Std: 3.51 dB)
+Rho Pre: 0.8723, Rho Post: 0.0013
+
+No difference to v24 output
+
+stationary jammer, no rand:
+Mean Total Power Reduction: 7.61 dB (Std: 0.22 dB)
+Mean DSI Projection Suppression: 64.49 dB (Std: 6.13 dB)
+Mean Correlation Drop: 28.44 dB (Std: 3.10 dB)
+Rho Pre: 0.9051, Rho Post: 0.0016
+
+No difference to v24 output
