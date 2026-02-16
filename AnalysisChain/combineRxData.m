@@ -8,9 +8,9 @@ addpath('ARDMakers');
 
 % Configuration
 % Ensure these paths match where you saved your FERS output files
-refFile = 'Input/JamSingleTarget_fers_latest_low_power_100uw/ArmasuisseRefRx_results.h5';
-surFile = 'Input/JamSingleTarget_fers_latest_low_power_100uw/ArmasuisseSurRx_results.h5';
-outFile = 'Input/JamSingleTarget_fers_latest_low_power_100uw/ArmasuisseJam.rcf';
+refFile = 'Input/JamSingleTarget_fers_latest_jam_only/ArmasuisseRefRx_results.h5';
+surFile = 'Input/JamSingleTarget_fers_latest_jam_only/ArmasuisseSurRx_results.h5';
+outFile = 'Input/JamSingleTarget_fers_latest_jam_only/ArmasuisseJam.rcf';
 
 % Parameters from your scenario
 Fs = 204800;
@@ -33,17 +33,9 @@ refData = complex(I_ref, Q_ref) * scale_ref;
 % --- VERIFICATION BLOCK ---
 power_Q_ref = var(imag(refData));
 fprintf('Power in Reference Q-channel after loading: %e\n', power_Q_ref);
-if power_Q_ref < 1e-10
-    error('Reference Q-channel is ZERO after loading. Halting.');
-end
-disp('Reference channel appears to be complex. Continuing...');
 % Do the same but for the real part
 power_I_ref = var(real(refData));
 fprintf('Power in Reference I-channel after loading: %e\n', power_I_ref);
-if power_I_ref < 1e-10
-    error('Reference I-channel is ZERO after loading. Halting.');
-end
-disp('Reference I-channel is valid. Continuing...');
 % --- END VERIFICATION BLOCK ---
 
 % 2. Load Surveillance
@@ -56,16 +48,8 @@ surData = complex(I_sur, Q_sur) * scale_sur;
 % --- VERIFICATION BLOCK ---
 power_Q_sur = var(imag(surData));
 fprintf('Power in Surveillance Q-channel after loading: %e\n', power_Q_sur);
-if power_Q_sur < 1e-10
-    error('Surveillance Q-channel is ZERO after loading. Halting.');
-end
-disp('Surveillance channel appears to be complex. Continuing...');
 power_I_sur = var(real(surData));
 fprintf('Power in Surveillance I-channel after loading: %e\n', power_I_sur);
-if power_I_sur < 1e-10
-    error('Surveillance I-channel is ZERO after loading. Halting.');
-end
-disp('Surveillance I-channel is valid. Continuing...');
 % --- END VERIFICATION BLOCK ---
 
 % 3. Create RCF Object

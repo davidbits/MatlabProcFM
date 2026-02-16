@@ -25,8 +25,9 @@ clear; clc; close all;
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1uw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_1mw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_1mw';
-targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_100uw';
+%targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_low_power_100uw';
 %targetFolder = 'Ref_Outputs/Latest_FIXED_JamSingleTarget_fers_latest_low_power_100uw';
+targetFolder = 'Output';
 
 DB_LEVEL = -40;
 
